@@ -5,6 +5,10 @@
 
 using namespace std;
 
+//static int labirynt[15][15];
+//static int y = 15, x = 15;
+
+
 static int labirynt[24][35];
 static int y = 24, x = 35;
 
@@ -18,7 +22,8 @@ int main()
         int wejscia[100][3], *poczatek_tablicy_wyjscia = &wejscia[0][0];
         for (int i = 0 ; i < 300 ; i++) *poczatek_tablicy_wyjscia++ = 0;    // czyszczenie tablicy wyjsc
 
-    	tworzenie_mapy(x, y, x * y - pola_specjalne(x, y, &wejscia[0][0]), &wejscia[0][0]);
+        tworzenie_mapy(x, y, x * y - pola_specjalne(x, y, &wejscia[0][0]), &wejscia[0][0]);
+    //	tworzenie_mapy(x, y, x * y - 1, &wejscia[0][0]);
 }
 
 
@@ -77,7 +82,7 @@ int pola_specjalne(int miara_x, int miara_y, int *wejscia)
         mniej_pol_o += 21;   // skrocenie labiryntu o dana ilosc pol
 
     /**************** KWADRATOWA SALA ********************/
-    for (int k = 0 ; k < 4 ; k++)
+    for (int k = 0 ; k < 4 ; k++)//4
     {
         do {
             pozycja_x = rand() % (miara_x - 3);     // losowanie polozenia
@@ -98,7 +103,7 @@ int pola_specjalne(int miara_x, int miara_y, int *wejscia)
     }
 
     /**************** PROSTOKATNA SALA ********************/
-    for (int k = 0 ; k < 3 ; k++)
+    for (int k = 0 ; k < 3 ; k++)//3
     {
         do {
             pozycja_x = rand() % (miara_x - 2);     // losowanie polozenia
@@ -123,7 +128,7 @@ int pola_specjalne(int miara_x, int miara_y, int *wejscia)
     }
 
     /****************  WIEKSZA ROTUNDA ********************/
-    for (int k = 0 ; k < 7 ; k++)
+    for (int k = 0 ; k < 7 ; k++)//7
     {
         do {
             pozycja_x = (rand() % (miara_x - 3)) + 1;     // losowanie polozenia
@@ -136,15 +141,15 @@ int pola_specjalne(int miara_x, int miara_y, int *wejscia)
         || suma_pol);                               // czy nie ma nic w miejscu wyjscia
 
         pole = &labirynt[pozycja_y][pozycja_x];     *pole++ = 45; *pole = 46; // rysunek
-        pole = &labirynt[pozycja_y + 1][pozycja_x]; *pole++ = 76; *pole = 53;
-        pole = &labirynt[pozycja_y + 2][pozycja_x]; *pole++ = 47; *pole = 48;
+        pole = &labirynt[pozycja_y + 1][pozycja_x]; *pole++ = 92; *pole = 53;
+        pole = &labirynt[pozycja_y + 2][pozycja_x]; *pole++ = 58; *pole = 48;
         labirynt[pozycja_y + 1][pozycja_x - 1] = 256; // tymczasowe zaznaczenie wyjscia
         *wejscia++ = pozycja_y + 1; *wejscia++ = pozycja_x - 1; *wejscia++ = 2; // otawrcie komnaty po budowie labiryntu
         mniej_pol_o += 6;   // skrocenie labiryntu o dana ilosc pol
     }
 
     /****************  ROTUNDA ********************/
-    for (int k = 0 ; k < 13 ; k++)
+    for (int k = 0 ; k < 13 ; k++)//13
     {
         do {
             pozycja_x = rand() % (miara_x - 1);     // losowanie polozenia
@@ -212,7 +217,7 @@ void tworzenie_mapy(int miara_x, int miara_y, int licznik, int *wejscia)
 
                 licznik--;
             }
-
+/*****************/
             poczatek_hallu = &duzy_holl[2][1];
             for (int i = 0 ; i < 6 ; i++) *(poczatek_hallu + 2) = *poczatek_hallu--;
             duzy_holl[0][0] = pozycja_y;
@@ -236,6 +241,7 @@ void tworzenie_mapy(int miara_x, int miara_y, int licznik, int *wejscia)
      //           for (int i = 0 ; i < 8 ; i++) *poczatek_hallu++ = 0;
                 }
             }
+  /*********************/
         }
         while (kierunek);
 
@@ -310,7 +316,7 @@ void tworzenie_mapy(int miara_x, int miara_y, int licznik, int *wejscia)
                 if (a == 15) labirynt[i][q] = 70;
                 if (a == 74) labirynt[i][q] = 96;
                 if (a == 77) labirynt[i][q] = 91;
-                if (a == 78) labirynt[i][q] = 75;
+                if (a == 78) labirynt[i][q] = 92;
                 if (a == 82) labirynt[i][q] = 100;
 
                 if (b == 12) labirynt[i][q + 1] = 71;
